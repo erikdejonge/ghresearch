@@ -1,0 +1,50 @@
+<h1 id="ghresearch">ghresearch</h1>
+<p>Research tool for Github, downloads repositories and generates markdown and html listings</p>
+<h2 id="search-github">search github</h2>
+<pre><code>Search github repositories
+
+Usage:
+    githubsearch.py [options] [--] &lt;username&gt; &lt;password&gt; &lt;target_dir&gt; &lt;min_stars&gt; &lt;numdays&gt; &lt;keyword&gt; 
+
+Options:
+  -h --help     Show this screen.
+  -c --clone    Clone the repositories found
+
+Description:
+    username   :  Github username
+    passwprd   :  Github passwprd
+    target_dir :  Folder to check and store results
+    min_stars  :  Minimum number of stars
+    numdays    :  Must be commit activity in last num days</code></pre>
+<h3 id="alias">alias</h3>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># github password stored in users root folder [.ghpwd]</span>
+
+<span class="kw">function</span><span class="fu"> _searchgh()</span> <span class="kw">{</span>
+    <span class="kw">python3</span> ~/workspace/ghresearch/githubsearch.py -c erik@a8.nl <span class="kw">`cat</span> ~/.ghpwd<span class="kw">`</span> ~/Desktop/ghresearch 1 21 <span class="st">&quot;</span><span class="kw">`echo</span> <span class="st">&quot;</span><span class="ot">$@</span><span class="st">&quot;</span><span class="kw">`</span><span class="st">&quot;</span>
+<span class="kw">}</span>
+
+<span class="kw">alias</span> searchgh=<span class="st">&quot;_searchgh&quot;</span></code></pre></div>
+<h3 id="usage">usage</h3>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">searchgh</span> python prompt toolkit 
+<span class="kw">&lt;arguments.Arguments</span> object at 0x10d5a25c<span class="kw">0&gt;</span>
+<span class="kw">---</span>
+<span class="kw">options</span>:
+  <span class="kw">clone</span>:  true
+  <span class="kw">help</span>:  false
+
+<span class="kw">positional</span>:
+  <span class="kw">keyword</span>:  python prompt toolkit
+  <span class="kw">min_stars</span>:  1
+  <span class="kw">numdays</span>:  21
+  <span class="kw">password</span>:  xxxxxx
+  <span class="kw">target_dir</span>:  /Users/rabshakeh/Desktop
+  <span class="kw">username</span>:  erik@a8.nl
+
+
+<span class="kw">1.56</span> <span class="kw">|</span> <span class="kw">githubsearch.py</span>:105 <span class="kw">|</span> <span class="kw">1</span> <span class="kw">|</span> <span class="kw">1421</span> <span class="kw">|</span> <span class="kw">python-prompt-toolkit</span> <span class="kw">|</span> <span class="kw">Wed</span>, 13 May 2015 17:56:01 GMT
+<span class="kw">Cloning</span> into <span class="st">&#39;python-prompt-toolkit&#39;</span>...
+<span class="kw">remote</span>: Counting objects: 3304, done.
+<span class="kw">remote</span>: Total 3304 (delta 0), <span class="kw">reused</span> 0 (delta 0), <span class="kw">pack-reused</span> 3304
+<span class="kw">Receiving</span> objects: 100% (3304/3304), <span class="kw">1.45</span> MiB <span class="kw">|</span> <span class="kw">1.51</span> MiB/s, done.
+<span class="kw">Resolving</span> deltas: 100% (2397/2397), <span class="kw">done.</span>
+<span class="kw">Checking</span> connectivity... done.</code></pre></div>
