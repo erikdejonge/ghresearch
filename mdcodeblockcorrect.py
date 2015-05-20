@@ -87,6 +87,8 @@ def correct_codeblocks(mdfile, force=False):
         outbuf = outbuf.replace("```", "\n```")
         outbuf = outbuf.replace("\n\n\n```", "\n\n```")
         outbuf = outbuf.replace("```\n\n```", "")
+        outbuf = outbuf.replace("```\n\n python\n", "\n\n``` python\n")
+
     open(mdfile, "w").write(outbuf)
     return cnt
 

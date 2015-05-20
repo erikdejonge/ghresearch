@@ -64,6 +64,7 @@ Checking connectivity... done.
 ## convert to html
 
 add to .bash_profile
+
 ``` bash
 function _md2html() {
     echo -e "\033[0;94m"$1"\033[0;96m    ->    "$(dirname $1)"/"$(basename $1 ".md").html"\033[0m"
@@ -95,6 +96,7 @@ function _allmd2html() {
 }
 alias allmd2html='_allmd2html'
 ```
+
 Run conversion script, go to dir and convert md to html
 
 ```bash
@@ -102,3 +104,5 @@ python3 genindex.py ~/Desktop/ghresearch
 cd ~/Desktop/ghresearch
 allmd2html
 ```
+
+![final](./ScreenShot.png)

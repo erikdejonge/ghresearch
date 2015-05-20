@@ -34,7 +34,7 @@ def main():
             if tf.endswith("rst"):
                 try:
                     rst2md(tf)
-                    correct_codeblocks(tf.replace(".rst", ".md"))
+                    correct_codeblocks(tf.replace(".rst", ".md"), True)
                 except UnicodeDecodeError:
                     print("error", tf)
 
