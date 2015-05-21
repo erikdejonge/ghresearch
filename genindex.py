@@ -20,12 +20,30 @@ from arguments import Arguments
 from mdcodeblockcorrect import correct_codeblocks
 
 
+class IArgument(Arguments):
+    """
+    IArgument
+    """
+    def __init__(self, doc=None, validateschema=None, argvalue=None, yamlstr=None, yamlfile=None, parse_arguments=True, persistoption=False, alwaysfullhelp=False, version=None, parent=None):
+        """
+        @type doc: str, None
+        @type validateschema: Schema, None
+        @type yamlfile: str, None
+        @type yamlstr: str, None
+        @type parse_arguments: bool
+        @type argvalue: str, None
+        @return: None
+        """
+        self.folder = ""
+        self.help = False
+        super().__init__(doc, validateschema, argvalue, yamlstr, yamlfile, parse_arguments, persistoption, alwaysfullhelp, version, parent)
+
+
 def main():
     """
     main
     """
-    arguments = Arguments(__doc__)
-    print(arguments)
+    arguments = IArgument(__doc__)
 
     for r, drs, fs in os.walk(arguments.folder):
         for f in fs:
@@ -37,7 +55,6 @@ def main():
                     correct_codeblocks(tf.replace(".rst", ".md"), True)
                 except UnicodeDecodeError:
                     print("error", tf)
-
 
     index = []
 
@@ -54,7 +71,11 @@ def main():
     indexfile.write("# Index " + arguments.folder + "\n\n")
 
     for i in index:
-        indexfile.write("* [" + i.replace(".md", "") + "](" + i.replace(".md", ".html") + ")\n")
+        if "source/api" not in i:
+            if "readme" in i.lower():
+                indexfile.write("* [*" + os.path.dirname(i).replace(arguments.folder, "") + "/" + os.path.basename(os.path.dirname(i)) + "/" + os.path.basename(i).replace(".md", "").upper() + "*](" + i.replace(".md", ".html").replace(arguments.folder, ".") + ")\n")
+            else:
+                indexfile.write("* [" + i.replace(".md", "").replace(os.path.dirname(arguments.folder), "") + "](" + i.replace(".md", ".html").replace(arguments.folder, ".") + ")\n")
 
     indexfile.close()
 

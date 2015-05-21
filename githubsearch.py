@@ -23,7 +23,9 @@ license: GNU-GPL2
 """
 import os
 import pytz
-import stat
+
+from git import Repo
+
 import time
 import datetime
 import arguments
@@ -31,37 +33,44 @@ import arguments
 from consoleprinter import console
 from dateutil.parser import parse
 from github import Github, GithubException
+from cmdssh import call_command
+
+
+class IArgument(arguments.Arguments):
+    """
+    IArgument
+    """
+    def __init__(self, doc=None, validateschema=None, argvalue=None, yamlstr=None, yamlfile=None, parse_arguments=True, persistoption=False, alwaysfullhelp=False, version=None, parent=None):
+        """
+        @type doc: str, None
+        @type validateschema: Schema, None
+        @type yamlfile: str, None
+        @type yamlstr: str, None
+        @type parse_arguments: bool
+        @type argvalue: str, None
+        @return: None
+        """
+        self.clone = False
+        self.help = False
+        self.keyword = ""
+        self.min_stars = 0
+        self.numdays = 0
+        self.password = ""
+        self.target_dir = ""
+        self.username = ""
+        super().__init__(doc, validateschema, argvalue, yamlstr, yamlfile, parse_arguments, persistoption, alwaysfullhelp, version, parent)
 
 
 def main():
     """
     main
     """
-    arg = arguments.Arguments(__doc__)
-    print(arg)
-
-    # noinspection PyUnresolvedReferences
+    arg = IArgument(__doc__)
     keyword = arg.keyword
-
-    # noinspection PyUnresolvedReferences
-    targetdir = os.path.expanduser(arg.target_dir)
-
-    # noinspection PyUnresolvedReferences
+    targetdir = os.path.join(os.path.expanduser(arg.target_dir), arg.keyword.replace(" ", "_").replace("/", ""))
     min_stars = arg.min_stars
-
-    # noinspection PyUnresolvedReferences
     clone = arg.clone
-
-    if clone:
-        if not os.path.exists(targetdir):
-            os.system("mkdir " + targetdir)
-
-    # noinspection PyUnresolvedReferences
     g = Github(arg.username, arg.password)
-
-    if clone:
-        os.chdir(os.path.expanduser(targetdir))
-
     results = []
     cnt = 0
 
@@ -74,9 +83,15 @@ def main():
         rpath = os.path.join(targetdir, p.name)
 
         if os.path.exists(rpath):
-            console(p.name, "skipped", color="blue")
+            console(p.stargazers_count, p.name, "skipped", color="blue")
         else:
             try:
+                if clone:
+                    if not os.path.exists(targetdir):
+                        call_command("mkdir " + targetdir)
+
+                    os.chdir(os.path.expanduser(targetdir))
+
                 commitobj = p.get_branch("master").commit
                 commitobj.update()
                 updated_at = commitobj.last_modified
@@ -100,16 +115,13 @@ def main():
                 # console(p)
 
                 if p.stargazers_count < min_stars:
-                    console(p.name, p.stargazers_count, color="grey")
+                    break
                 else:
                     cnt += 1
-                    console(cnt, p.stargazers_count, p.name, str(updated_at), color="green")
 
                     if clone:
-                        if (p.size / 100) > 5:
-                            os.system("git clone " + p.clone_url + " &")
-                        else:
-                            os.system("git clone " + p.clone_url)
+                        output = p.name + " " + str(Repo.clone_from(p.clone_url, p.name).active_branch) + " cloned"
+                        console(cnt, p.stargazers_count, output, str(updated_at), color="green")
 
                 #    console("skipp", str(p.name), color="blue")
             else:
@@ -117,12 +129,29 @@ def main():
                     print("del", rpath)
 
                     if clone:
-                        os.system("rm -Rf " + rpath)
+                        call_command("rm -Rf " + rpath)
 
         # print(g.get_user().add_to_starred(p))
 
-    os.system("wait")
+    for r, ds, f in os.walk(arg.target_dir):
+        if r != arg.target_dir and os.path.dirname(r) == arg.target_dir:
+            if len(f) == 0 and len(ds) == 0:
+                os.rmdir(r)
+            elif len(ds) == 0:
+                printf = True
 
+                for fw in f:
+                    if not fw.startswith("."):
+                        printf = False
+
+                if printf:
+                    for fw in f:
+                        os.remove(os.path.join(r, fw))
+
+                    os.rmdir(r)
+
+
+    #for r, ds, f in os.walk(arg.target_dir):
 
 if __name__ == "__main__":
     main()
