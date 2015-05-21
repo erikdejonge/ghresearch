@@ -72,8 +72,8 @@ def main():
 
     for i in index:
         if "source/api" not in i:
-            if "readme" in i.lower():
-                indexfile.write("* [*" + os.path.dirname(i).replace(arguments.folder, "") + "/" + os.path.basename(os.path.dirname(i)) + "/" + os.path.basename(i).replace(".md", "").upper() + "*](" + i.replace(".md", ".html").replace(arguments.folder, ".") + ")\n")
+            if i.lower().endswith("readme.md"):
+                indexfile.write("* [*" + os.path.dirname(i).replace(arguments.folder, "") + "/" + os.path.basename(os.path.dirname(i)) + "/" + os.path.basename(i).replace(".md", "") + "*](" + i.replace(".md", ".html").replace(arguments.folder, ".") + ")\n")
             else:
                 indexfile.write("* [" + i.replace(".md", "").replace(os.path.dirname(arguments.folder), "") + "](" + i.replace(".md", ".html").replace(arguments.folder, ".") + ")\n")
 
