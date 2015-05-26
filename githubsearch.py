@@ -4,7 +4,7 @@
 Search github repositories
 
 Usage:
-  githubsearch.py [options] [--] <username> <password> <target_dir> <min_stars> <numdays> <keyword>
+  githubsearch.py [options] [--] <username> <password> <target_dir> <numdays> <min_stars> <keyword>
 
 Options:
   -h --help     Show this screen.
