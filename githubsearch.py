@@ -75,6 +75,7 @@ def main():
     cnt = 0
 
     for p in g.search_repositories(keyword, "stars"):
+        console("checking", p.name, color="grey")
         results.append(p)
 
         if len(results) % 100 == 0:
@@ -120,6 +121,7 @@ def main():
                     cnt += 1
 
                     if clone:
+						
                         output = p.name + " " + str(Repo.clone_from(p.clone_url, p.name).active_branch) + " cloned"
                         console(cnt, p.stargazers_count, output, str(updated_at), color="green")
 
