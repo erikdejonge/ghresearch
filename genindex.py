@@ -44,6 +44,17 @@ def main():
     main
     """
     arguments = IArgument(__doc__)
+    for r, drs, fs in os.walk(arguments.folder):
+        if str(r.strip().strip("/")).endswith("docs"):
+            mk = os.path.join(r, "Makefile")
+            if os.path.exists(mk):
+                currd = os.getcwd()
+                os.chdir(r)
+                os.system("make html")
+                os.system("find . -type f -name '*.rst' -ls -delete")
+                os.system("rm Makefile")
+                os.chdir(currd)
+
 
     for r, drs, fs in os.walk(arguments.folder):
         for f in fs:
