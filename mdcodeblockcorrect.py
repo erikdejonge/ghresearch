@@ -88,7 +88,10 @@ def correct_codeblocks(mdfile, force=False):
         outbuf = outbuf.replace("\n\n\n```", "\n\n```")
         outbuf = outbuf.replace("```\n\n```", "")
         outbuf = outbuf.replace("```\n\n python\n", "\n\n``` python\n")
-        outbuf = outbuf.replace("```\n\n python\n", "\n\n``` bash\n")
+        outbuf = outbuf.replace("```\n\n bash\n", "\n\n``` bash\n")
+        outbuf = outbuf.replace("-   [", "- [")
+        outbuf = outbuf.replace("-   ", "- ")
+        outbuf = outbuf.replace("1.   ", "1. ")
 
     open(mdfile, "w").write(outbuf)
     return cnt
