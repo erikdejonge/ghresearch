@@ -75,27 +75,27 @@ def rst2md(rstfile, silent=False, clean=False):
     @type arg: str
     @return: None
     """
-
-    if not silent:
-        print("\033[34m" + rstfile.lower(), "->\033[0;96m", rstfile.lower().replace(".rst", ".md") + "\033[0m")
-    open(rstfile + ".tmp", "w").write(open(rstfile).read().replace(".. auto", "-- auto").replace("   :", "-- :"))
-    try:
-        os.system("pandoc -f rst -t markdown_github " + rstfile + ".tmp" + " -o " + rstfile.lower().replace(".rst", ".md") + " 2> /dev/null")
-
-        # noinspection PyBroadException
+    if os.path.exists(rstfile):
+        if not silent:
+            print("\033[34m" + rstfile.lower(), "->\033[0;96m", rstfile.lower().replace(".rst", ".md") + "\033[0m")
+        open(rstfile + ".tmp", "w").write(open(rstfile).read().replace(".. auto", "-- auto").replace("   :", "-- :"))
         try:
-            codebuf = [x for x in open(rstfile.lower().replace(".rst", ".md"))]
-            codebuf2 = make_nice_md(codebuf)
-            open(rstfile.lower().replace(".rst", ".md"), "w").write(codebuf2)
-        except:
-            codebuf = open(rstfile.lower().replace(".rst", ".md")).read()
-            codebuf = codebuf.replace("sourceCode", "python")
-            open(rstfile.lower().replace(".rst", ".md"), "w").write(codebuf)
+            os.system("pandoc -f rst -t markdown_github " + rstfile + ".tmp" + " -o " + rstfile.lower().replace(".rst", ".md") + " 2> /dev/null")
 
-        if clean is True:
-            os.remove(rstfile)
-    finally:
-        os.remove(rstfile + ".tmp")
+            # noinspection PyBroadException
+            try:
+                codebuf = [x for x in open(rstfile.lower().replace(".rst", ".md"))]
+                codebuf2 = make_nice_md(codebuf)
+                open(rstfile.lower().replace(".rst", ".md"), "w").write(codebuf2)
+            except:
+                codebuf = open(rstfile.lower().replace(".rst", ".md")).read()
+                codebuf = codebuf.replace("sourceCode", "python")
+                open(rstfile.lower().replace(".rst", ".md"), "w").write(codebuf)
+
+            if clean is True:
+                os.remove(rstfile)
+        finally:
+            os.remove(rstfile + ".tmp")
 
 
 def main():

@@ -48,6 +48,11 @@ def main():
         if str(r.strip().strip("/")).endswith("docs"):
             mk = os.path.join(r, "Makefile")
             if os.path.exists(mk):
+                os.system("git reset --hard")
+                if os.path.exists("requirements.txt"):
+                    os.system("pip3 install -r requirements.txt")
+                os.system("python3 setup.py install")
+
                 currd = os.getcwd()
                 os.chdir(r)
                 os.system("make html")
