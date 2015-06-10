@@ -79,21 +79,24 @@ def main():
             tf = os.path.join(r, f)
 
             if tf.endswith("md"):
+
                 index.append(tf)
 
     index.sort()
     indexpath = os.path.join(arguments.folder, "index.md")
-    indexfile = open(indexpath, "w")
+    indexfile = open(indexpath.replace(".html", ".md"), "w")
+    indexfilebook = open(os.path.basename(arguments.folder)+".md", "w")
+
     indexfile.write("# Index " + arguments.folder + "\n\n")
 
     for i in index:
         if "source/api" not in i:
-            if i.lower().endswith("readme.md"):
-                indexfile.write("* [*" + os.path.dirname(i).replace(arguments.folder, "") + "/" + os.path.basename(os.path.dirname(i)) + "/" + os.path.basename(i).replace(".md", "") + "*](" + i.replace(".md", ".html").replace(arguments.folder, ".") + ")\n")
-            else:
-                indexfile.write("* [" + i.replace(".md", "").replace(os.path.dirname(arguments.folder), "") + "](" + i.replace(".md", ".html").replace(arguments.folder, ".") + ")\n")
+
+            indexfile.write("* [" + i.replace(".md", "").replace(os.path.dirname(arguments.folder), "") + "](" + i.replace(arguments.folder.replace(".html", ".md"), ".") + ")\n")
+            indexfilebook.write("* [" + i.replace(".md", "").replace(os.path.dirname(arguments.folder), "") + "](" + i.replace(".md", ".html").replace(arguments.folder, ".") + ")\n")
 
     indexfile.close()
+    indexfilebook.close()
 
 
 if __name__ == "__main__":

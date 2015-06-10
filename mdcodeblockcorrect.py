@@ -95,6 +95,7 @@ def correct_codeblocks(mdfile, force=False, fromsrt=False):
         outbuf = outbuf.replace("-   ", "- ")
         outbuf = outbuf.replace("1.   ", "1. ")
         outbuf = outbuf.replace("\n\n\n", "\n\n")
+        outbuf = outbuf.replace("programlisting", "python")
     open(mdfile, "w").write(outbuf)
     return cnt
 
