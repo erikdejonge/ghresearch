@@ -22,6 +22,9 @@ def correct_codeblocks(mdfile, force=False, fromsrt=False):
     @type mdfile: str
     @return: None
     """
+    if force is True:
+        if fromsrt is False:
+            fromsrt = force
     try:
         inbuf = [x.rstrip().replace("\t", "    ") for x in open(mdfile)]
     except:
@@ -63,10 +66,12 @@ def correct_codeblocks(mdfile, force=False, fromsrt=False):
                         outbuf.append("\n```bash")
                         cnt += 1
                         cb = True
-                    elif l.startswith("    ") and not l.strip().startswith("<") and not "/>" in l and not l.endswith(";") and not "`" in l and not cb:
-                        if not cb:
-                            cnt += 1
-                            outbuf.append("\n```python")
+                    elif (l.startswith("    ") or l.startswith("\t"))and not l.strip().startswith("<") and not "/>" in l and not l.endswith(";") and not "`" in l and not cb:
+                        cnt += 1
+                        if l.strip().startswith("$"):
+                            outbuf.append("\n``` bash")
+                        else:
+                            outbuf.append("\n``` python")
 
                         cb = True
                     else:
