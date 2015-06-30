@@ -87,16 +87,20 @@ def main():
     indexfile = open(indexpath.replace(".html", ".md"), "w")
     indexfilebook = open(os.path.basename(arguments.folder)+".md", "w")
 
-    indexfile.write("# Index " + arguments.folder + "\n\n")
-
+    indexfile.write("# Index " + os.path.basename(arguments.folder) + "\n\n")
+    indexfilebook.write("# Index " + os.path.basename(arguments.folder) + "\n\n")
+    cnt = 1
     for i in index:
-        if "source/api" not in i:
-
-            indexfile.write("* [" + i.replace(".md", "").replace(os.path.dirname(arguments.folder), "") + "](" + i.replace(arguments.folder.replace(".html", ".md"), ".") + ")\n")
-            indexfilebook.write("* [" + i.replace(".md", "").replace(os.path.dirname(arguments.folder), "") + "](" + i.replace(".md", ".html").replace(arguments.folder, ".") + ")\n")
+        print(i)
+        if "source/api" not in i and "index" not in i and os.path.basename(arguments.folder)+".md" not in i:
+            indexfile.write(str(cnt)+". [" + i.replace(".md", "").replace(arguments.folder, "").replace("_", " ").strip('//').capitalize() + "](" + i.replace(arguments.folder.replace(".html", ".md"), ".") + ")\n")
+            indexfilebook.write(str(cnt)+". [" + i.replace(".md", "").replace(arguments.folder, "").replace("_", " ").strip('//').capitalize() + "](" + i.replace(".md", ".html").replace(arguments.folder, ".") + ")\n")
+            cnt += 1
 
     indexfile.close()
     indexfilebook.close()
+    print(indexfilebook.name)
+
 
 
 if __name__ == "__main__":
