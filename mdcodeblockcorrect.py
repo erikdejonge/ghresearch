@@ -95,8 +95,11 @@ def correct_codeblocks(mdfile, force=False, fromsrt=False):
         outbuf = outbuf.replace("-   [", "- [")
         outbuf = outbuf.replace("-   ", "- ")
         outbuf = outbuf.replace("1.   ", "1. ")
+        outbuf = outbuf.replace("\[", "[")
+        outbuf = outbuf.replace("\]", "]")
         outbuf = outbuf.replace("\n\n\n", "\n\n")
         outbuf = outbuf.replace("programlisting", "python")
+        outbuf = outbuf.replace("![](2.%20Why%20Value%20Matters%20Less%20with%20Competition.resources/C8D7D470-141C-4985-B463-A7C355237157.jpg)", "- ")
     open(mdfile, "w").write(outbuf)
     return cnt
 

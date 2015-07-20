@@ -1,4 +1,4 @@
-h1,
+®h1,
 h2,
 h3,
 h4,
@@ -171,39 +171,46 @@ h6 {
     text-rendering: geometricPrecision;
     font-family: "Source Code Pro Light";
     font-size: 16px;
-    margin-top: 6px;
+    margin-top: 12px;
     margin-bottom: 4px;
-    text-transform: capitalize;
+
 }
 
 h1 {
     color: #54B2BC;
     font-weight: normal;
     margin-top: 32px;
-    font-size: 24px;
+    font-size: 26px;
+    margin-bottom: 12px;
+    text-transform: capitalize;
 }
 
 h2 {
-    color: #54B2BC;
+    color: #81ddaf;
     margin-top: 24px;
     font-weight: normal;
     font-size: 20px;
+    margin-bottom: 8px;
 }
 
 h3 {
-    margin-top: 12px;
+
+    color: #ffd479;
+    margin-top: 24px;
 }
 
 h4 {
-
+    color: #bafcb8;
+    color: #ffd479;
 }
 
 h5 {
-
+    color: #bafcb8;
+    color: #ffd479;
 }
 
 h6 {
-
+    color: #bafcb8;
 }
 
 ul, ol {
