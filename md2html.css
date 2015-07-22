@@ -245,7 +245,8 @@ blockquote p a {
 }
 
 code, pre {
-    font-family: "Source Code Pro Light" font-size : 14 px;
+    font-family: "Source Code Pro Light";
+    font-size : 14 px;
 }
 
 code {
