@@ -45,9 +45,9 @@ def check_folder(bs):
 
 
 
-        if os.path.isdir(fp):
-            print("\033[95m>", fp ,"\033[0m")
-            check_folder(fp)
+        #if os.path.isdir(fp):
+        ##    print("\033[95m>", fp ,"\033[0m")
+        #    check_folder(fp)
 
 def main():
     """
