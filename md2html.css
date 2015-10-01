@@ -13,7 +13,7 @@ blockquote {
 body {
     text-rendering: geometricPrecision;
     font-family: "Source Code Pro Light";
-    font-size: 16px;
+    font-size: 18px;
     line-height: 150%;
     color: #F2F0CD;
     background-color: #1c1c1c;
@@ -186,21 +186,22 @@ h1 {
 }
 
 h2 {
-    color: #81ddaf;
+    color: #ffd479;
     margin-top: 24px;
     font-weight: normal;
     font-size: 20px;
     margin-bottom: 8px;
+    text-transform: capitalize;
 }
 
 h3 {
 
-    color: #ffd479;
+    color: #81ddaf;
     margin-top: 24px;
 }
 
 h4 {
-    color: #bafcb8;
+    color: #81ddaf;
     color: #ffd479;
 }
 
@@ -212,7 +213,6 @@ h5 {
 h6 {
     color: #bafcb8;
 }
-
 ul, ol {
     padding-left: 30px;
     margin-top: 0px;
@@ -390,7 +390,9 @@ code > span.fu {
 code > span.er {
     color: #FB9BEA
 }
-
+img[src='Error.src']{
+    display: none;
+}
 </style>
 </head>
 <body>
