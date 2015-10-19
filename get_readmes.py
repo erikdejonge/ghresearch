@@ -4,7 +4,7 @@
 Get readmes
 
 Usage:
-  get_readmes.py [options] [--] <target_dir>
+  get_readmes.py [options] [--] <source_dir> <target_dir>
 
 Options:
   -h --help     Show this screen.
@@ -20,7 +20,7 @@ import os
 import arguments
 
 
-def check_folder(bs):
+def check_folder(bs, td):
     """
     @type bs: list
     @return: None
@@ -28,14 +28,24 @@ def check_folder(bs):
     for d in os.listdir(bs):
         fp = os.path.join(bs, d)
         rm = os.path.join(fp, "readme.md")
-        np = "./githubreadme" + "/" + d + "/readme.md"
+        np = os.path.join(td, "githubreadme" + "/" + d + "/readme.md")
 
         if os.path.exists(rm):
             c = open(rm).read()
-            print(os.path.abspath(os.path.dirname(np)), np, len(c))
             os.makedirs(os.path.dirname(np), exist_ok=True)
-            open(np, "w").write(c)
-            pass
+            with open(np, "w") as fout:
+                fout.write(c)
+
+                print(os.path.abspath(os.path.dirname(np)), np, len(c))
+
+
+def ossystem(cmd):
+    """
+    @type cmd: str
+    @return: None
+    """
+    print(cmd)
+    os.system(cmd)
 
 
 def main():
@@ -43,17 +53,18 @@ def main():
     main
     """
     arg = arguments.Arguments(__doc__)
+    sourcedir = os.path.expanduser(arg.source_dir)
     targetdir = os.path.expanduser(arg.target_dir)
 
-    if targetdir == ".":
-        targetdir = os.getcwd()
+    print(sourcedir)
+    print(targetdir)
 
-    outdir = os.getcwd()
-
-    #os.system("rm -Rf "+os.path.join(outdir, "githubreadme")+"/*")
+    os.system("rm -Rf " + targetdir)
     targetdir = os.path.expanduser(targetdir)
-    os.chdir(targetdir)
-    check_folder(targetdir)
+    os.chdir(sourcedir)
+    check_folder(sourcedir, targetdir)
+    ossystem("mv " + sourcedir + " " + os.path.join(arg.target_dir, "githubreadme"))
+    os.chdir(os.path.join(arg.target_dir, "githubreadme"))
 
 
 if __name__ == "__main__":

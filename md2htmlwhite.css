@@ -110,7 +110,7 @@ input[type="checkbox"]:before, input[type="checkbox"]:checked:before {
     width: 22px !important;
     line-height: 22px;
     text-align: center;
-    font-weight: bold;
+
     content: '✘';
 }
 
@@ -341,7 +341,7 @@ td.sourceCode {
 
 code > span.kw {
     color: #8e2222;
-    font-weight: 700
+
 }
 
 code > span.dt {
