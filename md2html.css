@@ -1,4 +1,4 @@
-h1,
+    h1,
 h2,
 h3,
 h4,
@@ -202,23 +202,26 @@ h2 {
 }
 
 h3 {
+    font-size: 18px;
 
-    color: #ffd479;
+        color: #FFEF93;
     margin-top: 24px;
 }
 
 h4 {
-    color: #bafcb8;
+
     color: #ffd479;
 }
 
 h5 {
     color: #bafcb8;
     color: #ffd479;
+    color: #FAFFAF;
+    color: #B6FFAA;
 }
 
 h6 {
-    color: #bafcb8;
+    color: #F7FFC1;
 }
 
 ul, ol {
@@ -325,6 +328,7 @@ pre:not([class]) {
 p {
     white-space: pre-line;
 }
+
 
 div.sourceCode {
     overflow-x: auto
