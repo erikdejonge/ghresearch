@@ -42,7 +42,7 @@ em {
 }
 
 table {
-    min-width: 850px !important;
+    min-width: 1200px !important;
     width: 100% !important;
     margin: 10px 0 15px 0;
     border-collapse: collapse;
@@ -85,7 +85,7 @@ p {
 
 img {
     background-color: #7F7F7F;
-    max-width: 854px;
+    max-width: 1600px;
 }
 
 ul, ol {
@@ -280,7 +280,7 @@ sup {
 
 @media screen and (min-width: 914px) {
     body {
-        width: 854px;
+        width: 1195px;
         margin: 10px auto;
     }
 }
@@ -326,7 +326,7 @@ pre:not([class]) {
 }
 
 p {
-    white-space: pre-line;
+   /* white-space: pre-line;*/
 }
 
 
