@@ -1,4 +1,4 @@
-    h1,
+h1,
 h2,
 h3,
 h4,
@@ -13,14 +13,14 @@ blockquote {
 body {
     text-rendering: geometricPrecision;
     font-family: "Dyslexie";
-    font-family: "Source Code Pro Light";
+    font-family: "Source Code Pro Light" !important;
 
-    font-size: 16px;
-    line-height: 150%;
-    color: #F2F0CD;
-    background-color: #02090B;
-    margin: 10px 13px 10px 13px;
-    padding-bottom: 64px;
+    font-size: 16px !important;
+    line-height: 150% !important;
+    color: #F2F0CD !important;
+    background-color: #02090B !important;
+    margin: 10px 13px 10px 13px !important;
+    padding-bottom: 64px !important;
 }
 
 html * {
@@ -410,6 +410,3 @@ code > span.er {
 img[src='Error.src']{
     display: none;
 }
-</style>
-</head>
-<body>
