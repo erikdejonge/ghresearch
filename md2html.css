@@ -281,7 +281,7 @@ sup {
 @media screen and (min-width: 914px) {
     body {
         width: 1195px;
-        margin: 10px auto;
+        margin: 10px auto !important;
     }
 }
 
