@@ -98,7 +98,10 @@ def main():
     for i in index:
         if "source/api" not in i and "index" not in i and os.path.basename(arguments.folder) + ".md" not in i:
             #indexfile.write(str(cnt) + ". [" + i.replace(".md", "").replace(arguments.folder, "").replace("_", " ").strip('//').capitalize() + "](" + i.replace(arguments.folder.replace(".html", ".md"), ".") + ")\n")
-            indexfilebook.write(str(cnt) + ". [" + i.replace(".md", "").replace(arguments.folder, "").replace("_", " ").strip('//').capitalize() + "](" + i.replace(".html", ".md").replace(arguments.folder, ".") + ")\n")
+            name = i.replace(".md", "").replace(arguments.folder, "").replace("_", " ").strip('//').capitalize()
+            if "/" in name:
+                name = name.split("/", 1)
+            indexfilebook.write(str(cnt) + ". [" + name + "](" + i.replace(".html", ".md").replace(arguments.folder, ".") + ")\n")
             cnt += 1
 
     #indexfile.close()
