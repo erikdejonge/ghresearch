@@ -95,12 +95,28 @@ def main():
     indexfilebook.write("# Index " + os.path.basename(arguments.folder) + "\n\n")
     cnt = 1
 
+    chapters = {}
+    chapters[os.path.basename(os.getcwd()).capitalize()] = []
     for i in index:
         if "source/api" not in i and "index" not in i and os.path.basename(arguments.folder) + ".md" not in i:
             #indexfile.write(str(cnt) + ". [" + i.replace(".md", "").replace(arguments.folder, "").replace("_", " ").strip('//').capitalize() + "](" + i.replace(arguments.folder.replace(".html", ".md"), ".") + ")\n")
             name = i.replace(".md", "").replace(arguments.folder, "").replace("_", " ").strip('//').capitalize()
             if "/" in name:
                 name = name.split("/", 1)
+                if name[0] not in chapters:
+                    chapters[name[0]] = [(name[1], i)]
+                else:
+                    chapters[name[0]].append((name[1], i))
+            else:
+                chapters[os.path.basename(os.getcwd()).capitalize()].append((os.path.basename(i), i))
+
+    chapterkeys = list(chapters.keys())
+    chapterkeys.sort()
+    for chap in chapterkeys:
+        if len(chapters[chap]) > 0:
+            indexfilebook.write("\n\n## "+chap+"\n\n")
+        chaps = sorted(chapters[chap], key=lambda x: x[0]+x[1])
+        for name,i  in chaps:
             indexfilebook.write(str(cnt) + ". [" + name + "](" + i.replace(".html", ".md").replace(arguments.folder, ".") + ")\n")
             cnt += 1
 
