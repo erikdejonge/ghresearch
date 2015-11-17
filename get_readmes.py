@@ -53,6 +53,7 @@ def main():
     main
     """
     arg = arguments.Arguments(__doc__)
+    print(arg)
     sourcedir = os.path.expanduser(arg.source_dir)
     targetdir = os.path.expanduser(arg.target_dir)
 
@@ -63,8 +64,8 @@ def main():
     targetdir = os.path.expanduser(targetdir)
     os.chdir(sourcedir)
     check_folder(sourcedir, targetdir)
-    ossystem("mv " + sourcedir + " " + os.path.join(arg.target_dir, "githubreadme"))
-    os.chdir(os.path.join(arg.target_dir, "githubreadme"))
+    #ossystem("mv " + sourcedir + " " + os.path.join(arg.target_dir, "githubreadme"))
+    #os.chdir(os.path.join(arg.target_dir, "githubreadme"))
 
 
 if __name__ == "__main__":
