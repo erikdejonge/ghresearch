@@ -10,14 +10,32 @@ blockquote {
     padding: 0;
 }
 
+@font-face {
+    font-family: "Computer Modern";
+    src: url('file:///Users/rabshakeh/workspace/devenv/fonts/computermodern/Sans/cmunss.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "scpro";
+    src: url('file:///Users/rabshakeh/workspace/devenv/fonts/sourcecodepro/SourceCodePro-Regular.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
 body {
     text-rendering: geometricPrecision;
     font-family: "Dyslexie";
-    font-family: "Source Code Pro Light";
-
-    font-size: 16px;
+    /*font-family:  "scpro Light";*/
+    font-family:  "Computer Modern";
+    font-size: 18px;
     line-height: 150%;
-    color: #F2F0CD;
+    color: rgba(242, 240, 205, 0.8);
+
+    background-color: #000;
     background-color: #02090B;
     margin: 10px 13px 10px 13px;
     padding-bottom: 64px;
@@ -28,9 +46,9 @@ html * {
 }
 
 strong {
-    font-weight: bold;
+    font-weight: normal;
     color: #ffd479;
-    color: #64B68A;
+    color: rgba(100, 182, 138, 1);
 }
 
 em {
@@ -166,6 +184,9 @@ li.task-list-item input {
 ul li:nth-child(even) {
     background-color: #06181b;
 }
+ol li:nth-child(even) {
+    background-color: #06181b;
+}
 
 h1,
 h2,
@@ -177,8 +198,8 @@ h6 {
     color: #b4d9fb;
     margin-top: 18px;
     text-rendering: geometricPrecision;
-    font-family: "Source Code Pro Light";
-    font-size: 16px;
+    font-family: "scpro";
+    font-size: 18px;
     margin-top: 12px;
     margin-bottom: 4px;
     text-transform: capitalize;
@@ -186,6 +207,7 @@ h6 {
 
 h1 {
     color: #54B2BC;
+    color: rgba(255, 212, 121, 1);
     font-weight: normal;
     margin-top: 32px;
     font-size: 26px;
@@ -196,6 +218,8 @@ h1 {
 h2 {
 
     color: #ffd479;
+    color: rgba(255, 212, 121, 0.8);
+
     margin-top: 24px;
     font-weight: normal;
     font-size: 20px;
@@ -203,23 +227,22 @@ h2 {
 }
 
 h3 {
-    font-size: 16px;
-    color: #81ddaf;
+    font-size: 20px;
 
-    margin-top: 24px;
+    color: rgba(129, 206, 203, 1);
+    margin-top: 20px;
 }
 
 h4 {
-
-    color: #FFEF93;
+    color: rgba(129, 206, 203, 0.8);
 }
 
 h5 {
-    color: #FAFFAF;
+    color: rgba(129, 206, 203, 0.7);
 }
 
 h6 {
-    color: #B6FFAA;
+    color: rgba(129, 206, 203, 0.6);
 }
 
 ul, ol {
@@ -254,8 +277,8 @@ blockquote p a {
 }
 
 code, pre {
-    font-family: "Source Code Pro Light" !important;
-    color: #A0FEB5;
+    font-family: "scpro" !important;
+    color: #8EB1D0;
     display: block;
     padding: 12px;
     margin: 0 0 18px;
@@ -264,13 +287,10 @@ code, pre {
     letter-spacing: 1.1;
     border: 1px solid #3C3C3E;
     background-color: #051012;
-
-
     word-wrap: break-word;
     border-radius: 3px;
-    margin-top: 0px;
-    margin-bottom: 4px;
-
+    margin-top: 16px;
+    margin-bottom: 16px;
 }
 
 
@@ -286,7 +306,7 @@ sup {
 
 @media screen and (min-width: 914px) {
     body {
-        width: 1195px;
+        width: 1145px;
         margin: 10px auto;
     }
 }
@@ -309,7 +329,6 @@ pre {
     font-size: 16px;
     line-height: 20px;
     letter-spacing: 1.1;
-
     background-color: #051012;
     color: #116CD6 white-space : pre;
     white-space: pre-wrap;
@@ -324,15 +343,100 @@ pre code {
     color: #81ddaf;
     padding: 0;
     border: none;
+margin-top: 0px !important;
 
+margin-bottom: 0px !important;
 }
 
 pre:not([class]) {
     border: none;
     padding: 0px !important;
     color: #F2F0CD;
+
 }
 
 p {
     white-space: pre-line;
+}
+
+
+div.sourceCode {
+    overflow-x: auto
+}
+
+table.sourceCode, td.lineNumbers, td.sourceCode, tr.sourceCode {
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+    border: none
+}
+
+table.sourceCode {
+    width: 100%;
+    line-height: 100%
+}
+
+td.lineNumbers {
+    text-align: right;
+    padding-right: 4px;
+    padding-left: 4px;
+    color: #aaa;
+    border-right: 1px solid #aaa
+}
+
+td.sourceCode {
+    padding-left: 5px
+}
+
+.codehilite code, .codehilite pre {
+    color: #fdce93;
+    background-color: #3f3f3f
+}
+
+code > span.kw {
+    color: #BCFBBA;
+    font-weight: 700
+}
+
+code > span.dt {
+    color: #e90
+}
+
+code > span.dv {
+    color: #8AF9F0
+}
+
+code > span.bn, code > span.fl {
+    color: #40a070
+}
+
+code > span.st {
+    color: #FBFBAB
+}
+
+code > span.ch {
+    color: #93DD9F
+}
+
+code > span.co {
+    color: #929292
+}
+
+code > span.ot {
+    color: #76AEF4
+}
+
+code > span.al {
+    color: #e90
+}
+
+code > span.fu {
+    color: #00B1B1
+}
+
+code > span.er {
+    color: #FB9BEA
+}
+img[src='Error.src']{
+    display: none;
 }
