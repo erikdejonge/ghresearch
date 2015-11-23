@@ -75,12 +75,13 @@ def rst2md(rstfile, silent=False, clean=False):
     @type arg: str
     @return: None
     """
+
     if os.path.exists(rstfile):
         if not silent:
             print("\033[34m" + rstfile.lower(), "->\033[0;96m", rstfile.lower().replace(".rst", ".md") + "\033[0m")
-        open(rstfile + ".tmp", "w").write(open(rstfile).read().replace(".. auto", "-- auto").replace("   :", "-- :"))
+        open(rstfile + ".tmp", "w").write(open(rstfile).read().replace(".. auto", "-- auto").replace("   :", "-- :").replace(".. _", ""))
         try:
-            os.system("pandoc -f rst -t markdown_github " + rstfile + ".tmp" + " -o " + rstfile.lower().replace(".rst", ".md") + " 2> /dev/null")
+            os.system("pandoc -f rst -t markdown_github " + rstfile + ".tmp" + " -o " + rstfile.lower().replace(".rst", ".md") + " ")
 
             # noinspection PyBroadException
             try:

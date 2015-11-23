@@ -59,6 +59,9 @@ def correct_codeblocks(mdfile, force=False, fromsrt=False, forpdf=False):
                 else:
                     inblock = True
 
+            if l.endswith('`.'):
+                l = l.replace('`.', '`')
+
             if not inblock:
                 if l.strip().startswith("--"):
                     optionsblock = True
@@ -71,7 +74,7 @@ def correct_codeblocks(mdfile, force=False, fromsrt=False, forpdf=False):
                         outbuf.append("\n```bash")
                         cnt += 1
                         cb = True
-                    elif (l.startswith("    ") or l.startswith("\t")) and not l.strip().startswith("<!") and not "/>" in l and not l.endswith(";") and not "`" in l and not cb:
+                    elif ((l.startswith("    ") and not l.startswith("    - ")) and not l.strip().startswith("!") or l.startswith("\t")) and not l.strip().startswith("<!") and not "/>" in l and not l.endswith(";") and not "`" in l and not cb:
                         cnt += 1
 
                         if l.strip().startswith("$") or 'brew' in l or 'sudo' in l or 'pip' in l or 'python' in l:
