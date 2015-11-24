@@ -69,7 +69,7 @@ def correct_codeblocks(mdfile, force=False, fromsrt=False, forpdf=False):
                 if l.strip().startswith("#"):
                     optionsblock = False
 
-                if not optionsblock and not l.strip().startswith("1") and not l.strip().startswith(">"):
+                if not optionsblock and not l.strip().startswith("1") and not (l.strip().startswith(">") and not l.strip().startswith(">>")):
                     if (l.strip().startswith("sed") or l.strip().startswith("gsed")) and not cb:
                         outbuf.append("\n```bash")
                         cnt += 1
@@ -115,12 +115,12 @@ def correct_codeblocks(mdfile, force=False, fromsrt=False, forpdf=False):
         outbuf = outbuf.replace("[¶]", "[]")
         outbuf = outbuf.replace("\[", "[")
         outbuf = outbuf.replace("\]", "]")
-
-        # outbuf = outbuf.replace("```", "@# @# @# ")
-        # outbuf = outbuf.replace(" `", " ***")
-        # outbuf = outbuf.replace("` ", "*** ")
-        # outbuf = outbuf.replace("@# @# @# ", "```")
+        outbuf = outbuf.replace("```", "@# @# @# ")
+        outbuf = outbuf.replace("\*", "*")
+        outbuf = outbuf.replace("`", "**")
+        outbuf = outbuf.replace("@# @# @# ", "```")
         outbuf = outbuf.replace("\n\n\n", "\n\n")
+
         outbuf = outbuf.replace("programlisting", "python")
         outbuf = outbuf.replace("![](2.%20Why%20Value%20Matters%20Less%20with%20Competition.resources/C8D7D470-141C-4985-B463-A7C355237157.jpg)", "- ")
 
