@@ -34,6 +34,10 @@ def correct_codeblocks(mdfile, force=False, fromsrt=False, forpdf=False):
         inbuf = []
 
         for l in open(mdfile):
+            if "```" in l:
+                l = l.strip().replace("\t", "")
+            l = l.replace("_", "\_")
+            l = l.replace("\\_", "\_")
             inbuf.append(forceascii(l).replace("\t", "    "))
 
     outbuf = []
@@ -47,7 +51,7 @@ def correct_codeblocks(mdfile, force=False, fromsrt=False, forpdf=False):
                 return 0
 
     optionsblock = False
-
+    f = False
     for l in inbuf:
         if fromsrt:
             if not ismd:
@@ -62,6 +66,9 @@ def correct_codeblocks(mdfile, force=False, fromsrt=False, forpdf=False):
             if l.endswith('`.'):
                 l = l.replace('`.', '`')
 
+            if inblock:
+                l = l.replace("\_", "_")
+
             if not inblock:
                 if l.strip().startswith("--"):
                     optionsblock = True
@@ -69,12 +76,12 @@ def correct_codeblocks(mdfile, force=False, fromsrt=False, forpdf=False):
                 if l.strip().startswith("#"):
                     optionsblock = False
 
-                if not optionsblock and not l.strip().startswith("1") and not (l.strip().startswith(">") and not l.strip().startswith(">>")):
+                if not optionsblock and not l.strip().startswith("- ") and not l.strip().startswith("1") and not (l.strip().startswith(">") and not l.strip().startswith(">>")):
                     if (l.strip().startswith("sed") or l.strip().startswith("gsed")) and not cb:
                         outbuf.append("\n```bash")
                         cnt += 1
                         cb = True
-                    elif ((l.startswith("    ") and not l.startswith("    - ")) and not l.strip().startswith("!") and not l.strip().startswith("*") or l.startswith("\t")) and not l.strip().startswith("<!") and not "/>" in l and not l.endswith(";") and not "`" in l and not cb:
+                    elif ((l.startswith("    ") and not l.strip().startswith("- ")) and not l.strip().startswith("!") and not l.strip().startswith("*") or l.startswith("\t")) and not l.strip().startswith("<!") and not "/>" in l and not l.endswith(";") and not "`" in l and not cb:
                         cnt += 1
 
                         if l.strip().startswith("$") or 'brew' in l or 'sudo' in l or 'pip' in l or 'python' in l:
@@ -95,13 +102,15 @@ def correct_codeblocks(mdfile, force=False, fromsrt=False, forpdf=False):
 
                 if cb is True:
                     l = l.replace("    ", "", 1)
-
+        if cnt !=0 and f is False:
+            f = True
         outbuf.append(l)
 
     if cb is True:
         outbuf.append("```")
 
     outbuf = "\n".join(outbuf)
+
 
     if force is True:
         outbuf = outbuf.replace("```", "\n```")
@@ -120,6 +129,7 @@ def correct_codeblocks(mdfile, force=False, fromsrt=False, forpdf=False):
         outbuf = outbuf.replace("`", "**")
         outbuf = outbuf.replace("@# @# @# ", "```")
         outbuf = outbuf.replace("\n\n\n", "\n\n")
+
 
         outbuf = outbuf.replace("programlisting", "python")
         outbuf = outbuf.replace("![](2.%20Why%20Value%20Matters%20Less%20with%20Competition.resources/C8D7D470-141C-4985-B463-A7C355237157.jpg)", "- ")
@@ -145,6 +155,7 @@ def correct_codeblocks(mdfile, force=False, fromsrt=False, forpdf=False):
             inblock = not inblock
 
     open(mdfile, "w").write(outbuf2)
+
     return cnt
 
 
@@ -167,6 +178,7 @@ def main():
 
     mdfile = arg.mdfile
     forpdf = arg.forpdf
+
     cnt = correct_codeblocks(mdfile, arg.force, forpdf=forpdf)
 
     if not arg.silent:
