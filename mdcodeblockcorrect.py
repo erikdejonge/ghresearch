@@ -36,8 +36,9 @@ def correct_codeblocks(mdfile, force=False, fromsrt=False, forpdf=False):
         for l in open(mdfile):
             if "```" in l:
                 l = l.strip().replace("\t", "")
-            l = l.replace("_", "\_")
-            l = l.replace("\\_", "\_")
+
+            l = l.replace("\_", "_")
+
             inbuf.append(forceascii(l).replace("\t", "    "))
 
     outbuf = []
