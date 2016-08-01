@@ -46,12 +46,12 @@ def main():
     """
     arguments = IArguments(__doc__)
     c = open(arguments.file).read()
-    #print({1:c})
+    print({1:c})
 
     for i in range(0, 20):
         rs = "\n"+(19-i)*' '+"\n"
-
         c = c.replace(rs, "*--*")
+
     c = c.replace("\n", " ")
     c = c.replace("`,", "`")
     c = c.replace("##", "#")
