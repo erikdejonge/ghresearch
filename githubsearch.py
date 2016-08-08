@@ -121,7 +121,7 @@ def main():
                     cnt += 1
 
                     if clone:
-						
+
                         output = p.name + " " + str(Repo.clone_from(p.clone_url, p.name).active_branch) + " cloned"
                         console(cnt, p.stargazers_count, output, str(updated_at), color="green")
 
