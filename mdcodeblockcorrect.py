@@ -13,9 +13,10 @@ Options:
 
   -p --forpdf      Optimize for pdf
 """
+import os
+
 from arguments import Arguments
 from consoleprinter import forceascii
-import os
 
 
 def correct_codeblocks(mdfile, force=False, fromsrt=False, forpdf=False):
@@ -45,12 +46,23 @@ def correct_codeblocks(mdfile, force=False, fromsrt=False, forpdf=False):
     cb = False
     inblock = False
     cnt = 0
-
+    inbuf2 = []
+    prev = ""
     for l in inbuf:
+        print(l)
+        if inblock and not prev.startswith("    "):
+            inbuf2.append("```")
+        if "" is prev.strip() and l.startswith("    ") and not inblock:
+            inblock = True
+            inbuf2.append("```")
+
+
         if "```" in l:
             if force is False:
                 return 0
-
+        prev = l
+        inbuf2.append(l)
+    inbuf = inbuf2
     optionsblock = False
     f = False
     for l in inbuf:
