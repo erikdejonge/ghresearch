@@ -63,9 +63,10 @@ def main():
 
                 os.chdir(currd)
 
-    print(str(arguments.folder))
+
 
     for r, drs, fs in os.walk(arguments.folder):
+
         for f in fs:
             tf = os.path.join(r, f)
 
@@ -85,12 +86,17 @@ def main():
             tf = os.path.join(r, f)
 
             if tf.strip().endswith("md"):
+
                 index.append(tf)
 
     index.sort()
     indexpath = os.path.join(arguments.folder, "index.md")
     #indexfile = open(indexpath.replace(".html", ".md"), "w")
-    indexfilebook = open(os.path.basename(arguments.folder) + ".md", "w")
+    fname = os.path.join(arguments.folder, os.path.basename(arguments.folder) + ".md")
+    print(fname)
+    indexfilebook = open(fname, "w")
+    print(indexfilebook)
+
     #indexfile.write("# Index " + os.path.basename(arguments.folder) + "\n\n")
     indexfilebook.write("# Index " + os.path.basename(arguments.folder) + "\n\n")
     cnt = 1
@@ -98,7 +104,9 @@ def main():
     chapters = {}
     chapters[os.path.basename(os.getcwd()).capitalize()] = []
     for i in index:
+
         if "source/api" not in i and "index" not in i and os.path.basename(arguments.folder) + ".md" not in i:
+
             #indexfile.write(str(cnt) + ". [" + i.replace(".md", "").replace(arguments.folder, "").replace("_", " ").strip('//').capitalize() + "](" + i.replace(arguments.folder.replace(".html", ".md"), ".") + ")\n")
             name = i.replace(".md", "").replace(arguments.folder, "").replace("_", " ").strip('//').capitalize()
 
@@ -118,9 +126,10 @@ def main():
         if len(chapters[chap]) > 0:
             indexfilebook.write("\n\n## "+chap+"\n\n")
         chaps = sorted(chapters[chap], key=lambda x: x[0]+x[1])
+        print(chap)
         for name,i  in chaps:
             #print(name, i)
-            indexfilebook.write(str(cnt) + ". [" + name + "](" + i.replace(".html", ".md").replace(arguments.folder, ".") + ")\n")
+            indexfilebook.write(str(cnt) + ". [" + name + "](" + i.replace(".html", ".md").replace(arguments.folder, ".") + ") [📂](file://"+os.path.join(os.path.expanduser('~/workspace/github'),name.replace("/readme", ""))+")\n")
             cnt += 1
 
     #indexfile.close()

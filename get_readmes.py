@@ -25,7 +25,9 @@ def check_folder(bs, td):
     @type bs: list
     @return: None
     """
+
     for d in os.listdir(bs):
+
         fp = os.path.join(bs, d)
         rm = os.path.join(fp, "readme.md")
         np = os.path.join(td, "githubreadme" + "/" + d + "/readme.md")
@@ -36,8 +38,10 @@ def check_folder(bs, td):
             with open(np, "w") as fout:
                 fout.write(c)
 
-                print(os.path.abspath(os.path.dirname(np)), np, len(c))
-
+        else:
+            if os.path.isdir(fp):
+                check_folder(fp, td)
+                print('check_folder', fp, td)
 
 def ossystem(cmd):
     """
