@@ -1,3 +1,5 @@
+.DS_Store
+locatebash.egg-info
 .idea
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -14,7 +16,6 @@ develop-eggs/
 dist/
 downloads/
 eggs/
-.eggs/
 lib/
 lib64/
 parts/
@@ -38,11 +39,9 @@ pip-delete-this-directory.txt
 htmlcov/
 .tox/
 .coverage
-.coverage.*
 .cache
 nosetests.xml
 coverage.xml
-*,cover
 
 # Translations
 *.mo
